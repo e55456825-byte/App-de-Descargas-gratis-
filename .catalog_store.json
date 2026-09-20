@@ -1,0 +1,133 @@
+[
+  {
+    "id": "cat_pelicula_1",
+    "title": "Oppenheimer (2023)",
+    "category": "peliculas",
+    "coverUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80",
+    "description": "La historia del físico J. Robert Oppenheimer y su rol en el Proyecto Manhattan, que llevó a la creación de la primera bomba atómica.",
+    "year": "2023",
+    "genre": [
+      "Drama",
+      "Historia",
+      "Biografía"
+    ],
+    "quality": "1080p FHD Dual",
+    "bitzeroUrl": "112-mock_5961/part_1-part_2-part_3/2/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja181OTYx-ZGVzY2FyZ2FzX2dyYXRpcw-Mg-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/T3BwZW5oZWltZXIuMjAyMy4xMDgwcC5XRUJETC5EdWFsLkxhdGluby5ta3Y/4d2735b0",
+    "fileSize": 2450000000,
+    "fileName": "Oppenheimer.2023.1080p.WEBDL.Dual.Latino.mkv",
+    "partsCount": 3,
+    "downloadsCount": 144,
+    "createdAt": 1789676768831
+  },
+  {
+    "id": "cat_pelicula_2",
+    "title": "Spider-Man: A través del Spider-Verso",
+    "category": "peliculas",
+    "coverUrl": "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80",
+    "description": "Miles Morales es catapultado a través del Multiverso, donde se encuentra con un equipo de Spider-Personas encargadas de proteger su existencia.",
+    "year": "2023",
+    "genre": [
+      "Animación",
+      "Acción",
+      "Aventura",
+      "Sci-Fi"
+    ],
+    "quality": "1080p Ultra HD",
+    "bitzeroUrl": "79-mock_1887/part_1-part_2-part_3/1/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja18xODg3-ZGVzY2FyZ2FzX2dyYXRpcw-MQ-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/U3BpZGVyLU1hbi5BY3Jvc3MudGhlLlNwaWRlci1WZXJzZS4xMDgwcC5ta3Y/2ff82999",
+    "fileSize": 2100000000,
+    "fileName": "Spider-Man.Across.the.Spider-Verse.1080p.mkv",
+    "partsCount": 3,
+    "downloadsCount": 289,
+    "createdAt": 1789763168831
+  },
+  {
+    "id": "cat_serie_1",
+    "title": "Breaking Bad",
+    "category": "series",
+    "coverUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",
+    "description": "Un profesor de química de secundaria con cáncer terminal se asocia con un exalumno para fabricar y vender metanfetamina para asegurar el futuro de su familia.",
+    "year": "2008 - 2013",
+    "genre": [
+      "Crimen",
+      "Drama",
+      "Thriller"
+    ],
+    "quality": "1080p HD Remaster",
+    "season": "Temporada 1",
+    "episode": "Capítulo 01 (Piloto)",
+    "bitzeroUrl": "64-mock_4162/part_1-part_2-part_3/2/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja180MTYy-ZGVzY2FyZ2FzX2dyYXRpcw-Mg-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/QnJlYWtpbmcuQmFkLlMwMUUwMS5QaWxvdC4xMDgwcC5ta3Y/a23f76bb",
+    "fileSize": 1250000000,
+    "fileName": "Breaking.Bad.S01E01.Pilot.1080p.mkv",
+    "partsCount": 3,
+    "downloadsCount": 512,
+    "createdAt": 1789503968832
+  },
+  {
+    "id": "cat_serie_2",
+    "title": "Stranger Things",
+    "category": "series",
+    "coverUrl": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80",
+    "description": "Cuando un niño desaparece, sus amigos, la familia y la policía local se ven envueltos en un misterio extraordinario con experimentos secretos y fuerzas sobrenaturales.",
+    "year": "2022",
+    "genre": [
+      "Fantasía",
+      "Terror",
+      "Misterio"
+    ],
+    "quality": "1080p FHD Dual Latino",
+    "season": "Temporada 4",
+    "episode": "Capítulo 01: El Club del Fuego Infernal",
+    "bitzeroUrl": "58-mock_1557/part_1-part_2-part_3/2/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja18xNTU3-ZGVzY2FyZ2FzX2dyYXRpcw-Mg-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/U3RyYW5nZXIuVGhpbmdzLlMwNEUwMS4xMDgwcC5EdWFsLm1rdg/5e3dc5cc",
+    "fileSize": 1400000000,
+    "fileName": "Stranger.Things.S04E01.1080p.Dual.mkv",
+    "partsCount": 3,
+    "downloadsCount": 340,
+    "createdAt": 1789590368832
+  },
+  {
+    "id": "cat_anime_1",
+    "title": "Demon Slayer: Kimetsu no Yaiba",
+    "category": "animes",
+    "coverUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80",
+    "description": "Tanjiro Kamado, un joven cuya familia fue masacrada por un demonio y cuya hermana menor Nezuko fue transformada en uno, emprende un viaje para convertirla de nuevo en humana.",
+    "year": "2019 - 2024",
+    "genre": [
+      "Anime",
+      "Acción",
+      "Fantasía Oscura",
+      "Shonen"
+    ],
+    "quality": "1080p FHD BD-Rip",
+    "season": "Temporada 1 (Tanjiro Kamado Risshi-hen)",
+    "episode": "Capítulo 01: Crueldad",
+    "bitzeroUrl": "81-mock_2283/part_1-part_2-part_3/2/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja18yMjgz-ZGVzY2FyZ2FzX2dyYXRpcw-Mg-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/RGVtb24uU2xheWVyLktpbWV0c3Uubm8uWWFpYmEuUzAxRTAxLjEwODBwLm1rdg/c2f64040",
+    "fileSize": 650000000,
+    "fileName": "Demon.Slayer.Kimetsu.no.Yaiba.S01E01.1080p.mkv",
+    "partsCount": 3,
+    "downloadsCount": 780,
+    "createdAt": 1789849568832
+  },
+  {
+    "id": "cat_anime_2",
+    "title": "Attack on Titan (Shingeki no Kyojin)",
+    "category": "animes",
+    "coverUrl": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80",
+    "description": "La humanidad vive atrincherada tras enormes muros para protegerse de los Titanes devoradores de humanos. Eren Jaeger jura erradicarlos a todos tras la caída de su hogar.",
+    "year": "2023",
+    "genre": [
+      "Anime",
+      "Acción",
+      "Drama Militar",
+      "Misterio"
+    ],
+    "quality": "1080p FHD Dual",
+    "season": "The Final Season",
+    "episode": "Parte 3 (Especial)",
+    "bitzeroUrl": "60-mock_8429/part_1-part_2-part_3/3/aHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9iaXR6ZXJvL21vY2stb2pz-ZW1hbnVlbF9ib3Q-UGFzc3dvcmRSZXBvIzIwMjQ-bW9ja184NDI5-ZGVzY2FyZ2FzX2dyYXRpcw-Mw-MTc4OTkzNTk2OA-QGJpdHplcm8jMjAyNA/QXR0YWNrLm9uLlRpdGFuLkZpbmFsLlNlYXNvbi5QYXJ0My4xMDgwcC5ta3Y/c22a89bd",
+    "fileSize": 890000000,
+    "fileName": "Attack.on.Titan.Final.Season.Part3.1080p.mkv",
+    "partsCount": 3,
+    "downloadsCount": 620,
+    "createdAt": 1789892768832
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "name": "Descargas gratis Emanuel",
+  "description": "Plataforma para descargar series, películas y animes al mismo tiempo en segundo plano, con selección de carpeta y horarios programados de inicio y fin.",
+  "requestFramePermissions": ["notifications"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
