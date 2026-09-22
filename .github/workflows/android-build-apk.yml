@@ -1,0 +1,163 @@
+name: Build Android Release APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Sign Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configurar Java JDK 17 (distribución temurin)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # 3. Optimizar compilación y caché con setup-gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' }}
+
+      # 4. Otorgar permisos de ejecución al Gradle Wrapper
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew || true
+
+      # 5. Generar archivo .env vacío para evitar fallos del plugin Secrets Gradle
+      - name: Create empty .env file
+        run: |
+          echo "Creando archivo .env si no existe..."
+          touch .env
+          if [ -d "app" ]; then
+            touch app/.env
+          fi
+
+      # 6. Generar Keystore y configurar firma para Release
+      - name: Generate Release Keystore & Configure Signing
+        run: |
+          echo "Generando keystore de firma para Release..."
+          mkdir -p "$HOME/.android"
+          KEYSTORE_PATH="$HOME/release.keystore"
+          
+          # Generar clave criptográfica RSA con keytool
+          keytool -genkeypair -v \
+            -keystore "$KEYSTORE_PATH" \
+            -alias androidreleasekey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass androidpassword \
+            -keypass androidpassword \
+            -dname "CN=Android Release, OU=Mobile, O=Apps, L=Global, S=Global, C=ES"
+
+          # Configurar variables de entorno globales para Gradle
+          echo "RELEASE_STORE_FILE=$KEYSTORE_PATH" >> $GITHUB_ENV
+          echo "RELEASE_STORE_PASSWORD=androidpassword" >> $GITHUB_ENV
+          echo "RELEASE_KEY_ALIAS=androidreleasekey" >> $GITHUB_ENV
+          echo "RELEASE_KEY_PASSWORD=androidpassword" >> $GITHUB_ENV
+
+          # Inyectar propiedades en ~/.gradle/gradle.properties para compatibilidad directa
+          mkdir -p ~/.gradle
+          cat << 'EOF' >> ~/.gradle/gradle.properties
+          android.useAndroidX=true
+          android.enableJetifier=true
+          RELEASE_STORE_FILE=/home/runner/release.keystore
+          RELEASE_STORE_PASSWORD=androidpassword
+          RELEASE_KEY_ALIAS=androidreleasekey
+          RELEASE_KEY_PASSWORD=androidpassword
+          EOF
+
+      # 7. Compilar APK Release con Gradle Wrapper (o fallback a gradle del sistema)
+      - name: Assemble Release APK
+        run: |
+          if [ -f "./gradlew" ]; then
+            echo "Ejecutando compilación con ./gradlew :app:assembleRelease..."
+            ./gradlew :app:assembleRelease --no-daemon --stacktrace
+          else
+            echo "Gradle Wrapper no encontrado. Ejecutando con gradle del sistema..."
+            gradle :app:assembleRelease --no-daemon --stacktrace
+          fi
+
+      # 8. Asegurar firma y zipalign del APK para instalación directa en dispositivos Android
+      - name: Ensure APK is Signed and Zipaligned
+        run: |
+          echo "Localizando herramientas de Android SDK Build-Tools..."
+          BUILD_TOOLS_DIR=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
+          ZIPALIGN="$BUILD_TOOLS_DIR/zipalign"
+          APKSIGNER="$BUILD_TOOLS_DIR/apksigner"
+          KEYSTORE_PATH="$HOME/release.keystore"
+
+          RELEASE_DIR="app/build/outputs/apk/release"
+          if [ ! -d "$RELEASE_DIR" ]; then
+            RELEASE_DIR=$(find . -type d -path "*/build/outputs/apk/release" | head -n 1)
+          fi
+
+          echo "Directorio de salida release: $RELEASE_DIR"
+          cd "$RELEASE_DIR"
+
+          UNSIGNED_APK=$(find . -maxdepth 1 -name "*unsigned*.apk" | head -n 1)
+          STANDARD_APK=$(find . -maxdepth 1 -name "*.apk" ! -name "*unsigned*" ! -name "*-aligned.apk" | head -n 1)
+
+          TARGET_APK=""
+          if [ -n "$UNSIGNED_APK" ]; then
+            echo "Encontrado APK sin firmar: $UNSIGNED_APK"
+            TARGET_APK="$UNSIGNED_APK"
+          elif [ -n "$STANDARD_APK" ]; then
+            echo "Encontrado APK estándar: $STANDARD_APK"
+            TARGET_APK="$STANDARD_APK"
+          fi
+
+          if [ -n "$TARGET_APK" ]; then
+            echo "Alineando con zipalign..."
+            "$ZIPALIGN" -v -p 4 "$TARGET_APK" aligned-release.apk || cp "$TARGET_APK" aligned-release.apk
+
+            echo "Firmando con apksigner (v1, v2 y v3)..."
+            "$APKSIGNER" sign --ks "$KEYSTORE_PATH" \
+              --ks-pass pass:androidpassword \
+              --key-pass pass:androidpassword \
+              --ks-key-alias androidreleasekey \
+              --v1-signing-enabled true \
+              --v2-signing-enabled true \
+              --v3-signing-enabled true \
+              --out app-release.apk aligned-release.apk
+
+            echo "Verificando firma con apksigner verify..."
+            "$APKSIGNER" verify --verbose app-release.apk
+
+            rm -f aligned-release.apk
+            echo "APK Release listo para instalación directa: $RELEASE_DIR/app-release.apk"
+          else
+            echo "Verificando APKs existentes en $RELEASE_DIR:"
+            ls -la
+          fi
+
+      # 9. Verificar y subir el APK resultante como artefacto descargable (retención 30 días)
+      - name: Upload Release APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: |
+            app/build/outputs/apk/release/*.apk
+            **/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          retention-days: 30
